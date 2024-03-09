@@ -33,8 +33,8 @@ export function levelingDialog(branch: Branches, currentLevel: number, actor) {
         </div>
         ${branch === Branches.RainScribes 
           ? `<div class="form-group">
-            <label>Is Highbram's Advantage?</label>
-            <input name="isFriendHighbram" type="checkbox">
+            <label>Is Haibram's Advantage?</label>
+            <input name="isFriendHaibram" type="checkbox">
           </div>` 
           : ''}
     </form>`;
@@ -53,8 +53,8 @@ export function levelingDialog(branch: Branches, currentLevel: number, actor) {
           const options = new Set(["action:study", Slugs[branch]]);
           const isCram = html.find("[name=isCram]")[0]?.checked ?? false;
           if (isCram) options.add("action:cram");
-          const isFriendHighbram = html.find("[name=isFriendHighbram]")[0]?.checked ?? false;
-          const amount = 1 + Number(isCram) + Number(isCram && isFriendHighbram);
+          const isFriendHaibram = html.find("[name=isFriendHaibram]")[0]?.checked ?? false;
+          const amount = 1 + Number(isCram) + Number(isCram && isFriendHaibram);
 
           for (let i = 0;i < amount; i++) {
             actor.skills[slugSkill].check.roll({
