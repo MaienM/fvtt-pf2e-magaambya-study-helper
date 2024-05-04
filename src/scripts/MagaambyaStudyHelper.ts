@@ -28,17 +28,16 @@ export class MagaambyaStudyHelper {
   }
 
   static initialize() {
-    Hooks.on("renderCharacterSheetPF2e", (app, html, obj) => {
-      let actor = app.object;
-      let element = html.find(".window-header .window-title");
-      if (element.length != 1) return;
-      let button = $(
-        `<a class="popout" style><i class="fas fa-book"></i>Magaambya Helper</a>`
-      );
-      button.on("click", () => {
-        const bof = new BranchOverviewForm(actor).render(true);
-      });
-      element.after(button);
+    Hooks.on('getActorSheetHeaderButtons', (sheet, buttons) => {
+      buttons.unshift({
+        label: 'Magaambya Helper',
+        class: 'popout',
+        icon: 'fas fa-book',
+        onclick: async () => {
+          new BranchOverviewForm(sheet.object).render(true);
+        },
+      })
+      return buttons;
     });
     Hooks.on("renderBranchOverviewForm", (app, html, obj) => {
       let actor = app.object;
